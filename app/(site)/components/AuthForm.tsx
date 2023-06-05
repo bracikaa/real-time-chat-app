@@ -65,7 +65,6 @@ const AuthForm = () => {
     if (status === "LOGIN") {
       signIn("credentials", { ...data, redirect: false })
         .then((callback) => {
-          console.log(callback);
           if (callback?.error) {
             toast.error("Something went wrong. Please try again");
           }
@@ -86,7 +85,6 @@ const AuthForm = () => {
 
     signIn(action, { redirect: false })
       .then((callback) => {
-        console.log(callback);
         if (callback?.error) {
           toast.error("Something went wrong. Please try again");
         }
@@ -101,7 +99,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="mt-8 sm:mx-auto sm:w-full flex justify-center">
+    <div className="mt-8 sm:w-full flex justify-center flex-col sm:flex-row">
       <div className="bg-white px-4 py-8 shadow sm:rounded-l-lg sm:px-10 sm:max-w-xl sm:min-width-md">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h1 className="mx-auto w-auto text-center text-2xl">Hello!</h1>
@@ -168,15 +166,17 @@ const AuthForm = () => {
           </div>
         </div>
       </div>
-      <Image
-        className="sm:rounded-r-lg"
-        src="/logincover.png"
-        alt="Login cover"
-        width="512"
-        height="512"
-        priority={true}
-        quality={75}
-      />
+      <div className="sm:rounded-r-lg shadow overflow-auto">
+        {" "}
+        <Image
+          src="/logincover.png"
+          alt="Login cover"
+          width="512"
+          height="512"
+          priority={true}
+          quality={75}
+        />
+      </div>
     </div>
   );
 };
