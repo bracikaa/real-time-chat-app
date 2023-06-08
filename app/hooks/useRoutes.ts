@@ -1,24 +1,24 @@
 import { useMemo } from "react";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { HiChat } from "react-icons/hi";
 import { HiArrowLeftOnRectangle, HiUsers } from "react-icons/hi2";
 import { signOut } from "next-auth/react";
-import useConversation from "./useConversation";
+import useThread from "./useThread";
 
-const conversationsUrl = "/conversations";
+const threadsUrl = "/threads";
 const usersUrl = "/users";
 
 const useRoutes = () => {
   const pathName = usePathname();
-  const { conversationId } = useConversation();
+  const { threadId } = useThread();
 
   const routes = useMemo(
     () => [
       {
         label: "Chat",
-        href: conversationsUrl,
+        href: threadsUrl,
         icon: HiChat,
-        active: pathName === conversationsUrl || !!conversationId,
+        active: pathName === threadsUrl || !!threadId,
       },
       {
         label: "Users",
@@ -33,7 +33,7 @@ const useRoutes = () => {
         onClick: () => signOut(),
       },
     ],
-    [pathName, conversationId]
+    [pathName, threadId]
   );
 
   return routes;

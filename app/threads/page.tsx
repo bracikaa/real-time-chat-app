@@ -2,10 +2,10 @@
 
 import clsx from "clsx";
 import EmptyState from "../components/EmptyState";
-import useConversation from "../hooks/useConversation";
+import useThread from "../hooks/useThread";
 
 const Home = () => {
-  const { isOpen } = useConversation();
+  const { isOpen } = useThread();
 
   return (
     <div

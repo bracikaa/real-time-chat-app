@@ -1,18 +1,18 @@
 import Avatar from "@/app/components/Avatar";
 import useOtherUser from "@/app/hooks/useOtherUser";
-import { FullConversationType } from "@/app/types";
+import { FullThreadType } from "@/app/types";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
-interface ConversationBoxProps {
-  data: FullConversationType;
+interface ThreadBoxProps {
+  data: FullThreadType;
   selected?: boolean;
 }
 
-const ConversationBox: React.FC<ConversationBoxProps> = ({
+const ThreadBox: React.FC<ThreadBoxProps> = ({
   data,
   selected,
 }) => {
@@ -21,7 +21,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
   const router = useRouter();
 
   const handleClick = useCallback(() => {
-    router.push(`/conversations/${data?.id}`);
+    router.push(`/threads/${data?.id}`);
   }, [data?.id, router]);
 
   const lastMessage = useMemo(() => {
@@ -57,7 +57,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
       return lastMessage.body;
     }
 
-    return "Started a conversation";
+    return "Started a thread";
   }, [lastMessage]);
 
   return (
@@ -95,4 +95,4 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
   );
 };
 
-export default ConversationBox;
+export default ThreadBox;

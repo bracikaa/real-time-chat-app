@@ -1,7 +1,7 @@
 import getCurrentUser from "./getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
-const getConversations = async () => {
+const getThreads = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser?.id) {
@@ -9,7 +9,7 @@ const getConversations = async () => {
   }
 
   try {
-    const conversations = await prisma?.conversation.findMany({
+    const thread = await prisma?.thread.findMany({
       orderBy: {
         lastMessageAt: "desc",
       },
@@ -29,10 +29,10 @@ const getConversations = async () => {
       },
     });
 
-    return conversations;
+    return thread;
   } catch (error) {
     return [];
   }
 };
 
-export default getConversations;
+export default getThreads;

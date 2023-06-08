@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     }
 
     if (isGroup) {
-      const newThread = await prisma.conversation.create({
+      const newThread = await prisma.thread.create({
         data: {
           name,
           isGroup,
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       return NextResponse.json(newThread);
     }
 
-    const existingThread = await prisma.conversation.findMany({
+    const existingThread = await prisma.thread.findMany({
       where: {
         OR: [
           {
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
       return NextResponse.json(singleThread);
     }
 
-    const newThread = await prisma.conversation.create({
+    const newThread = await prisma.thread.create({
       data: {
         users: {
           connect: [{ id: currentUser.id }, { id: userId }],

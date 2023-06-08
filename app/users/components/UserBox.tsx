@@ -16,9 +16,9 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     setIsLoading(true);
 
     axios
-      .post("/api/conversations", { userId: data.id })
+      .post("/api/threads", { userId: data.id })
       .then((data) => {
-        router.push(`/conversations/${data.data.id}`);
+        router.push(`/threads/${data.data.id}`);
       })
       .finally(() => {
         setIsLoading(false);
@@ -28,7 +28,7 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
   return (
     <div
       onClick={handleClick}
-      className="w-full relative flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer"
+      className="user-box w-full relative flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer"
     >
       <Avatar user={data} />
       <div className="min-w-0 flex-1">

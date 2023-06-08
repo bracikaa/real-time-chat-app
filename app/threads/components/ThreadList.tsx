@@ -1,23 +1,22 @@
 "use client";
 
-import useConversation from "@/app/hooks/useConversation";
-import { FullConversationType } from "@/app/types";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdOutlineGroupAdd } from "react-icons/md";
-import ConversationBox from "./ConversationBox";
+import useThread from "@/app/hooks/useThread";
+import { FullThreadType } from "@/app/types";
 
-interface ConversationListProps {
-  initialItems: FullConversationType[];
+interface ThreadListProps {
+  initialItems: FullThreadType[];
 }
 
-const ConversationList: React.FC<ConversationListProps> = ({
+const ThreadList: React.FC<ThreadListProps> = ({
   initialItems,
 }) => {
   const [items, setItems] = useState(initialItems);
   const router = useRouter();
-  const { conversationId, isOpen } = useConversation();
+  const { threadId, isOpen } = useThread();
   return (
     <aside
       className={clsx(
@@ -33,11 +32,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
           </div>
         </div>
         {items.map((item) => {
-          return <ConversationBox key={item.id} data={item} />;
+          return <ThreadBox key={item.id} data={item} />;
         })}
       </div>
     </aside>
   );
 };
 
-export default ConversationList;
+export default ThreadList;
