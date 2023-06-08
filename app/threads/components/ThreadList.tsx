@@ -6,6 +6,7 @@ import { useState } from "react";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import useThread from "@/app/hooks/useThread";
 import { FullThreadType } from "@/app/types";
+import ThreadBox from "./ThreadBox";
 
 interface ThreadListProps {
   initialItems: FullThreadType[];
@@ -20,7 +21,7 @@ const ThreadList: React.FC<ThreadListProps> = ({
   return (
     <aside
       className={clsx(
-        "fixed inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200",
+        "thread-list fixed inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200",
         isOpen ? "hidden" : "block w-full left-0"
       )}
     >

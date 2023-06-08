@@ -5,20 +5,21 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 interface ThreadBoxProps {
   data: FullThreadType;
   selected?: boolean;
 }
 
-const ThreadBox: React.FC<ThreadBoxProps> = ({
-  data,
-  selected,
-}) => {
+const ThreadBox: React.FC<ThreadBoxProps> = ({ data, selected }) => {
   const otherUser = useOtherUser(data);
   const session = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+    console.log(otherUser);
+  }, [otherUser]);
 
   const handleClick = useCallback(() => {
     router.push(`/threads/${data?.id}`);
@@ -64,7 +65,7 @@ const ThreadBox: React.FC<ThreadBoxProps> = ({
     <div
       onClick={handleClick}
       className={clsx(
-        "w-full relative flex items-center space-x-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer p-3",
+        "thread-box w-full relative flex items-center space-x-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer p-3",
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
