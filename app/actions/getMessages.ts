@@ -1,3 +1,5 @@
+import prisma from "@/app/libs/prismadb";
+
 const getMessages = async (threadId: string) => {
   try {
     const messages = await prisma?.message.findMany({
@@ -14,6 +16,7 @@ const getMessages = async (threadId: string) => {
     });
 
     return messages;
+
   } catch (error: any) {
     return [];
   }
