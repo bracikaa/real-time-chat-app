@@ -8,10 +8,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 interface MessageBoxProps {
+  isLast: boolean;
   message: FullMessageType;
 }
 
-const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
+const MessageBox: React.FC<MessageBoxProps> = ({ isLast, message }) => {
   const session = useSession();
 
   const isOwn = session?.data?.user?.email === message?.sender?.email;
@@ -52,6 +53,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
               <div>{message.body}</div>
             )}
           </div>
+          {isLast && isOwn && seenList.length > 0 && (
+            <div className="text-xs font-light text-gray-500">{`Seen by ${seenList}`}</div>
+          )}
         </div>
       </div>
     </div>

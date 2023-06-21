@@ -12,9 +12,7 @@ interface ThreadListProps {
   initialItems: FullThreadType[];
 }
 
-const ThreadList: React.FC<ThreadListProps> = ({
-  initialItems,
-}) => {
+const ThreadList: React.FC<ThreadListProps> = ({ initialItems }) => {
   const [items, setItems] = useState(initialItems);
   const router = useRouter();
   const { threadId, isOpen } = useThread();
