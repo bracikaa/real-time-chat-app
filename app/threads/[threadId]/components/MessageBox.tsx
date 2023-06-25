@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect } from "react";
 
 interface MessageBoxProps {
   isLast: boolean;
@@ -16,7 +17,19 @@ const MessageBox: React.FC<MessageBoxProps> = ({ isLast, message }) => {
   const session = useSession();
 
   const isOwn = session?.data?.user?.email === message?.sender?.email;
-  const seenList = message.seen || [];
+  const seenList =
+    message.seen
+      .filter((seenUser) => {
+        return seenUser.email !== message?.sender?.email;
+      })
+      .map((seenUser) => {
+        return seenUser.name;
+      })
+      .join(", ") || [];
+
+  useEffect(() => {
+    console.log(message);
+  }, [message]);
 
   const container = clsx("flex gap-3 p-4", isOwn && "justify-end");
   const avatar = clsx(isOwn && "order-2");
