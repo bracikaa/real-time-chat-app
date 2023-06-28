@@ -78,7 +78,7 @@ const ThreadBox: React.FC<ThreadBoxProps> = ({ data, selected }) => {
             </p>
             {lastMessage?.createdAt && (
               <p className="text-xs text-gray-400 font-light">
-                {format(new Date(lastMessage.createdAt), "p")}
+                {format(new Date(lastMessage.createdAt), " dd.LL.yy hh:mm")}
               </p>
             )}
           </div>

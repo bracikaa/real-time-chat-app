@@ -7,6 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Thread, User } from "@prisma/client";
 import React, { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
+import ConfirmModal from "./ConfirmModal";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -34,9 +35,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
   return (
     <>
-      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-        Hello!
-      </Modal>
+      <ConfirmModal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+      />
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={onClose}>
           <Transition.Child
