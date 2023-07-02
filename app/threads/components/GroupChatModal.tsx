@@ -41,10 +41,11 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
   const members = watch("members");
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
     setIsLoading(false);
 
     axios
-      .post("/api/conversations", {
+      .post("/api/threads", {
         ...data,
         isGroup: true,
       })
@@ -95,7 +96,6 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                     shouldValidate: true,
                   })
                 }
-                value={members}
               />
             </div>
           </div>

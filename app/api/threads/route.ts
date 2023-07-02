@@ -9,8 +9,6 @@ export async function POST(request: Request) {
 
     const { userId, isGroup, members, name } = body;
 
-    console.log(userId, isGroup, members, name)
-
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse("Unauthorized", { status: 400 });
     }
@@ -27,7 +25,7 @@ export async function POST(request: Request) {
           users: {
             connect: [
               ...members.map((member: { value: string }) => {
-                id: member.value;
+                return { id: member.value };
               }),
               {
                 id: currentUser.id,
