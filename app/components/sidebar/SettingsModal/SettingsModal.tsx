@@ -1,23 +1,17 @@
 "use client";
 
-import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Modal from "../Modal";
-import Input from "../inputs/Input";
+import Modal from "../../Modal";
+import Input from "../../inputs/Input";
 import Image from "next/image";
 import { CldUploadButton } from "next-cloudinary";
-import { HiPhoto } from "react-icons/hi2";
-import Button from "../Button";
-
-export interface SettingsModalProps {
-  isOpen?: boolean;
-  onClose: () => void;
-  currentUser: User;
-}
+import Button from "../../Button";
+import { SettingsModalProps } from "./SettingsModalProps";
+import Avatar from "../../Avatar";
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
@@ -26,6 +20,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -64,7 +59,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="settings-modal-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -90,7 +85,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   <Image
                     width="48"
                     height="48"
-                    className="rounded-full"
+                    className="rounded-full object-fit-contain"
                     src={image || currentUser.image || "/avatar.png"}
                     alt="Avatar"
                   />

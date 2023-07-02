@@ -157,9 +157,7 @@ const AuthForm = () => {
         </div>
         <div className="flex gap-2 justify-center tet-sm mt-6 px-2 text-gray-500">
           <div>
-            {status === "LOGIN"
-              ? "First time here?"
-              : "Already have an account?"}
+            or
           </div>
           <div onClick={toggleStatus} className="underline cursor-pointer">
             {status === "LOGIN" ? "Create an account" : "Log In"}
