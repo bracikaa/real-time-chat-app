@@ -5,7 +5,7 @@ import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 import Avatar from "../Avatar";
 import { DesktopSidebarProps } from "./models/DesktopSidebarProps";
-import SettingsModal from "./SettingsModal";
+import SettingsModal from "./SettingsModal/SettingsModal";
 
 const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
   const routes = useRoutes();
