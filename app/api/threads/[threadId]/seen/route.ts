@@ -1,6 +1,7 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
+import { pusherServer } from "@/app/libs/pusher";
 
 interface IParams {
   threadId?: string;
@@ -55,7 +56,18 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       },
     });
 
-    return NextResponse.json(updatedMessage);
+    await pusherServer.trigger(currentUser.email, "thread:update", {
+      id: threadId,
+      messages: [updatedMessage],
+    });
+
+    if (lastMessage.seenIds.indexOf(currentUser.id) !== -1) {
+      return NextResponse.json(thread);
+    }
+
+    await pusherServer.trigger(threadId!, "message:update", updatedMessage);
+
+    return new NextResponse("Success");
   } catch (error) {
     console.log(error, "ERROR_MESSAGES_SEEN");
     return new NextResponse("Error", { status: 500 });
